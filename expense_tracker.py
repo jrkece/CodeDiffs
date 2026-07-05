@@ -26,6 +26,20 @@ def list_expenses():
     for e in expenses:
         print(f"{e['date']}  {e['description']:<25} ${e['amount']:>8.2f}  ({e['category']})")
 
+def clear_expenses():
+    """Removes all recorded expenses from the file."""
+    expenses = load_expenses()
+    if not expenses:
+        print("Your tracker is already empty.")
+        return
+        
+    confirm = input(f"Are you sure you want to delete all {len(expenses)} expenses? (y/N): ")
+    if confirm.lower() == 'y':
+        save_expenses([])
+        print("All expenses successfully cleared.")
+    else:
+        print("Operation cancelled.")
+
 def delete_expense(index_str):
     """Deletes an expense using its 1-based list index number."""
     expenses = load_expenses()
